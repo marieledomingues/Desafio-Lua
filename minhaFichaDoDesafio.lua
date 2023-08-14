@@ -49,7 +49,8 @@ local favoriteTime = "Noturno"
 local item = "Couro infernal, Chama do inferno e Chave do mundo inferior"
 
 -- Fraqueza
-local fraqueza = "Magia Sagrada, Magia Branca"
+local whiteMagicFragility = 4
+local holyMagicFragility = 6
 
 -- Atributos
 local attackAttribute = 8
@@ -57,18 +58,32 @@ local defenseAttribute = 5
 local lifeAttribute = 10
 local speedAttribute = 5
 local inteligenceAttribute = 4
-local fraquezaAttribute = 7
-
-
 
 -- função que recebe um atributo e nos retorna uma barra de proguresso / texto
 local function getProgressBar(attribute)
+    local fullChar = "❤️"
+    local emptyChar = "🖤"
+
+    local result = ""
+    for i = 1, 10, 1 do
+            if i <= attribute then
+                result = result .. fullChar
+                -- Coração Vermelho
+            else
+                result = result .. emptyChar
+                -- Coração Preto
+            end
+    end
+    return result 
+end
+
+local function getProgressBar(fragility)
     local fullChar = "⬜"
     local emptyChar = "⬛"
 
     local result = ""
     for i = 1, 10, 1 do
-            if i <= attribute then
+            if i <= fragility then
                 result = result .. fullChar
                 -- Quadradinho cheio
             else
@@ -94,6 +109,8 @@ print("|     Defesa:      " .. getProgressBar(defenseAttribute))
 print("|     Vida:        " .. getProgressBar(lifeAttribute))
 print("|     Velocidade:  " .. getProgressBar(speedAttribute))
 print("|     Inteligencia:" .. getProgressBar(inteligenceAttribute))
-print("|     Fraqueza:    " .. getProgressBar(fraquezaAttribute))
+print("|     Fraqueza:    ")
+print("|     Magia Branca".. getProgressBar(whiteMagicFragility))
+print("|     Magia Sagrada"..getProgressBar(holyMagicFragility))
 print("| ")
 print("===================================================")
